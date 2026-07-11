@@ -1,0 +1,8 @@
+source/*.mp3
+source/*.wav
+source/*.aiff
+*.DS_Store
+source/private/
+api-worker/wrangler.toml
+api-worker/.dev.vars
+api-worker/node_modules/

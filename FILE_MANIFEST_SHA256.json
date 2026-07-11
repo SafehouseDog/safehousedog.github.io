@@ -1,0 +1,221 @@
+{
+  "version": "v29-github-pages-frontend",
+  "scope": "frontend",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 138,
+      "sha256": "c7638db3cc42001f42b0ce43cb352eb4b7a6aaed20e6ff25fc00b3e61da1419b"
+    },
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".well-known/security.txt",
+      "bytes": 155,
+      "sha256": "dfb358d05aa5418ed4dcbfd4a3131add81c6d38161b4109ca14eaeca56c9a536"
+    },
+    {
+      "path": "BUILD_INFO.json",
+      "bytes": 626,
+      "sha256": "cddeb66a114b8e433966fa82b32b6bf3c248fb4377368530b7b583bd293e132e"
+    },
+    {
+      "path": "CNAME",
+      "bytes": 17,
+      "sha256": "c4eb59f102b380196bf6aa4e6612969708dc59ee4b7e6e00402a0031ded555f8"
+    },
+    {
+      "path": "CNAME.example",
+      "bytes": 17,
+      "sha256": "c4eb59f102b380196bf6aa4e6612969708dc59ee4b7e6e00402a0031ded555f8"
+    },
+    {
+      "path": "COUNTER_BACKEND.md",
+      "bytes": 3125,
+      "sha256": "fb7830e49a6f1fa2d4e69d86b36c94d5ca467fefa073c010338cc9734a3b9dce"
+    },
+    {
+      "path": "DEPLOY_CHECKLIST.md",
+      "bytes": 2368,
+      "sha256": "06d630817aab1d808b1d092d346525f72931ec18d8c7558bb9b485bf95affccd"
+    },
+    {
+      "path": "I18N.md",
+      "bytes": 1001,
+      "sha256": "d107d4f535e2cd32e010e36fb29ec725fb0b76a3f08114c398987a500ddfd433"
+    },
+    {
+      "path": "ORACLE.md",
+      "bytes": 1304,
+      "sha256": "0bacf54cb94fa65d3ec8cc219dcc0050bdb4800c659f27cda19b59be30516423"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4208,
+      "sha256": "68eaa8e86d9a378cfe9bbf29a799e57749eb8f19873a168aa08738979f6f6e10"
+    },
+    {
+      "path": "SETUP.md",
+      "bytes": 1679,
+      "sha256": "50b9fdf0196e510d38d25132c4e7c2c414f01905528106b00b05b7bffcd7cf3c"
+    },
+    {
+      "path": "SYNC.md",
+      "bytes": 928,
+      "sha256": "b8892206a82d4e00a5d070ab9de9e7378ed8f6d748c4f45f9777919f07f4c041"
+    },
+    {
+      "path": "archive/qrcode_matrix_column_decoder.original.html",
+      "bytes": 137564,
+      "sha256": "912fdb5f1e76bc1a6421d197cbf592c1a166e41c8360abd490b17aead758c938"
+    },
+    {
+      "path": "assets/dog.gif",
+      "bytes": 130535,
+      "sha256": "507a4f6c9f66a5dbb744a9b017895eee5db70e37e1df74b26264af432fb3c0c9"
+    },
+    {
+      "path": "assets/dog.png",
+      "bytes": 2602940,
+      "sha256": "2aa80d44123e522ec68cc99e8f21a16189f0d398b036f1774d7df6ad9014d1b7"
+    },
+    {
+      "path": "assets/last_safe_house_logo.png",
+      "bytes": 235106,
+      "sha256": "af541b3e2e2b9390246a94b48ece59a0199d907229a58380ad1d18ea578ae046"
+    },
+    {
+      "path": "assets/qr_bep20.png",
+      "bytes": 1630,
+      "sha256": "ca78a45c509f02f4395e34be8a27e8cb3c6e39a37eb213a1211ff35178a1e5c9"
+    },
+    {
+      "path": "assets/qr_ton.png",
+      "bytes": 2011,
+      "sha256": "33fcd1fd5216736ef1a6de31db711b3a3a2f789e200597555f19c81d836d4b43"
+    },
+    {
+      "path": "assets/qr_trc20.png",
+      "bytes": 1617,
+      "sha256": "76d319d29e6d7a0497fee0f9c1c17171234a3a0bb85f5fe8a4f9658874204408"
+    },
+    {
+      "path": "assets/qr_usdt_ton.png",
+      "bytes": 1634,
+      "sha256": "d75237e4a240101ff3626f1e35510023a2342db1569e54ebe6af40ac6c4048ff"
+    },
+    {
+      "path": "assets/qrcode_matrix.tgs",
+      "bytes": 30903,
+      "sha256": "827f2545a3addb1bd0b95a35368ea8fdd5f218557c6104b1c5a369081b40f2a9"
+    },
+    {
+      "path": "assets/reference_signal.gif",
+      "bytes": 868182,
+      "sha256": "076ad43a3f070f8729adf5dab9d54ac425703e677bb07ea3fd5d23114390d26d"
+    },
+    {
+      "path": "assets/the_hood_close.webp",
+      "bytes": 210652,
+      "sha256": "6decbbd4161e5412290cdc0ec4d2302909bc14db7aef134b4e334495fb8ff203"
+    },
+    {
+      "path": "assets/the_hood_watcher.webp",
+      "bytes": 164170,
+      "sha256": "734e6f88004eaa3c48f69744d75bcb0091af829e435bdf79d49a67cdb81f4136"
+    },
+    {
+      "path": "audio/README.md",
+      "bytes": 428,
+      "sha256": "40d24c163c952095c505fd1ad62b60d3dfe613429606746cfc8223b050f2ebb5"
+    },
+    {
+      "path": "css/style.css",
+      "bytes": 31710,
+      "sha256": "a21348c39bc20824f7ed30061b175b80692b6f66aa5521715fdda3db1d4c1c74"
+    },
+    {
+      "path": "data/lyrics.json",
+      "bytes": 39271,
+      "sha256": "daa314706a379ffbab018165b886657e7110ad0a11e21bb3cfb089677d606f31"
+    },
+    {
+      "path": "data/nodes.json",
+      "bytes": 60469,
+      "sha256": "3dc60b977c049da3d75aa011a750e9ca9496a4ef66b40b5c4b03f805b1a49591"
+    },
+    {
+      "path": "data/oracle.en.enc",
+      "bytes": 32651,
+      "sha256": "7c78df830f32fd96ad96e4308673ced77a04c21e429d3c3dcc408074ad8bd6ec"
+    },
+    {
+      "path": "data/oracle.enc",
+      "bytes": 32651,
+      "sha256": "7c78df830f32fd96ad96e4308673ced77a04c21e429d3c3dcc408074ad8bd6ec"
+    },
+    {
+      "path": "data/oracle.ru.enc",
+      "bytes": 30727,
+      "sha256": "ef939df3489ec7c8385a28c9a85af7bc49a2887923b8cc6fd1ef28d1bb3c0535"
+    },
+    {
+      "path": "data/quest.json",
+      "bytes": 2115,
+      "sha256": "69b33cae97a256eb9c66c11cf375abdfaedb23734595a29a66dc725bbb1b235f"
+    },
+    {
+      "path": "data/site.json",
+      "bytes": 2460,
+      "sha256": "b6a727e5345d288aea62d111dec74f9428b039da2d2b4e62722b548d36c3ee59"
+    },
+    {
+      "path": "data/tracks.json",
+      "bytes": 4037,
+      "sha256": "9e876fcbc0c35c5110146d31fedc9a7590bed4e321d5feba6eef840b6d207163"
+    },
+    {
+      "path": "docs/1-14texts.md",
+      "bytes": 16902,
+      "sha256": "7049fbd04ebe4315707eea7d16db7370f203950279f16601a931ab1ad1fd55d8"
+    },
+    {
+      "path": "index.html",
+      "bytes": 16094,
+      "sha256": "541b91f5cfde2030373b6a3eec67e8c88f42177f9e657cfb3aaa5ea5ddfc8b11"
+    },
+    {
+      "path": "js/app.js",
+      "bytes": 86513,
+      "sha256": "d27862bcec05a4c4c7176d56b5c1800f1bbfbb8dfa9300631bc7aaabe7418d40"
+    },
+    {
+      "path": "js/data.js",
+      "bytes": 120816,
+      "sha256": "72def5601ab67afa87772ab0366da56e44dfa29fd90c3c3efe614f653e1f327d"
+    },
+    {
+      "path": "js/i18n.js",
+      "bytes": 39276,
+      "sha256": "d259a8313d539a6dde39039996948d820a2d149c400909ce0934d4e64dbfdb57"
+    },
+    {
+      "path": "robots.txt",
+      "bytes": 83,
+      "sha256": "95b6dd8774355c6b048d394e600ecca73842872145a856986d20f2fb6f92cfd2"
+    },
+    {
+      "path": "source/README.md",
+      "bytes": 94,
+      "sha256": "dc7a8326a0a73d172a8acf7e27e96e425bd93bc65fa6d4f3796c1ede7bfcc080"
+    },
+    {
+      "path": "tools/encrypt-final.mjs",
+      "bytes": 1426,
+      "sha256": "12dcd55f6a98f5c335d93f91e552ab482bb5d31e71b75261246bdeb1ba3aa840"
+    }
+  ]
+}

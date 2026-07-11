@@ -1,0 +1,4 @@
+Contact: mailto:SECURITY_EMAIL_PLACEHOLDER
+Preferred-Languages: en, ru
+Policy: https://github.com/followwhiteduck/ledger
+Expires: 2027-01-01T00:00:00.000Z

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>THE LAST SAFE HOUSE — Case 001 / Follow White Duck</title>
+<meta content="Minimal ARG radio decoder. The Last Safe House. Case 001: Follow White Duck." name="description"/>
+<meta content="no-referrer" name="referrer"/>
+<meta content="default-src 'self'; img-src 'self' data:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://api.whiteduck.online https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div aria-live="polite" class="toast" id="toast"></div>
+<div aria-hidden="true" class="qrModal hidden" id="qrModal">
+<div aria-label="support route qr" aria-modal="true" class="qrModalCard" data-i18n-aria="aria.qrDialog" role="dialog">
+<button aria-label="close" class="qrClose" data-i18n-aria="aria.close" id="qrClose" type="button">×</button>
+<span class="eyebrow" data-i18n="routes.route" id="qrRouteLabel">route</span>
+<img alt="support route qr" draggable="false" id="qrRouteImage" src=""/>
+<p data-i18n="routes.genericWarning" id="qrRouteWarning">Send only the selected asset on the selected network.</p>
+</div>
+</div>
+<div class="watcher" id="watcher">
+<button aria-label="watcher mark" class="watcherMark" data-i18n-aria="aria.watcher" id="watcherMark" type="button"></button>
+<aside aria-label="the hood watcher" class="watcherCard" data-i18n-aria="aria.watcherCard">
+<img alt="Safe House Dog watcher mark" draggable="false" src="assets/dog.png"/>
+<div class="watcherText">
+<span data-i18n="watcher.label">THE LAST SAFE HOUSE // WATCHER MARK</span>
+<p id="watcherKoan">Do not trust the dog. Check the file. If you feed the signal, verify the route first.</p>
+</div>
+</aside>
+</div>
+<main class="page" id="terminalRoot">
+<header aria-label="station header" class="topline toplineCenter">
+<a aria-label="The Last Safe House" class="brand brandLogo brandLogoCenter" href="./"><img alt="The Last Safe House" draggable="false" src="assets/last_safe_house_logo.png"/></a>
+<div class="status statusCenter">
+<span aria-hidden="true" class="dot" id="liveDot"></span>
+<span id="headerStatus">paused</span>
+<span class="caseSmall" data-i18n="header.case">/ case 001</span>
+<span class="relaySmall">/ whiteduck.online</span>
+<a class="microFund" href="#support" id="topFund">next door 000/1999</a>
+</div>
+<nav aria-label="Language / Язык" class="languageSwitch"><button aria-pressed="true" class="langButton" data-lang="en" type="button">EN</button><button aria-pressed="false" class="langButton" data-lang="ru" type="button">RU</button></nav></header>
+<section aria-label="radio relay" class="hero">
+<div class="radioCard">
+<div class="meta"><span class="caseLabel" data-i18n="hero.case">CASE 001 / FOLLOW WHITE DUCK</span><span id="radioState">carrier cold</span></div>
+<div aria-label="reference signal" class="gifWrap" id="gifTrigger">
+<img alt="QR word-layer reference signal" class="qrGif" draggable="false" src="assets/reference_signal.gif"/>
+<button class="tune" data-i18n="hero.tune" id="tuneButton" type="button">TUNE</button>
+</div>
+<h1 class="trackTitle" id="trackTitle">Restore the Rain</h1>
+<div class="subtitle" id="trackMeta">first contact wakes track 01</div>
+<div class="trackKoan" id="trackKoan">Not a station.
+A bruise in memory.
+The signal arrives blind.
+The file waits awake.</div>
+<div aria-label="audio controls" class="controls" data-control-zone="">
+<button aria-label="previous track" class="iconBtn" data-i18n-aria="aria.prevTrack" id="prevTrack" type="button">‹</button>
+<button aria-label="play pause" class="iconBtn main" data-i18n-aria="aria.playPause" id="playPause" type="button">▶</button>
+<button aria-label="next track" class="iconBtn" data-i18n-aria="aria.nextTrack" id="nextTrack" type="button">›</button>
+<input aria-label="seek" class="seek" data-i18n-aria="aria.seek" id="seek" max="100" min="0" type="range" value="0"/>
+<div class="time" id="time">00:00</div>
+</div>
+<div aria-label="tone controls" class="toneControls" data-control-zone="">
+<button aria-label="volume" aria-valuemax="100" aria-valuemin="0" aria-valuenow="86" class="dial" data-dial="volume" data-value="86" id="volDial" role="slider" type="button"><i></i><span data-i18n="dials.volume">VOL</span></button>
+<button aria-label="low frequencies" aria-valuemax="12" aria-valuemin="-12" aria-valuenow="0" class="dial" data-dial="low" data-value="0" id="lowDial" role="slider" type="button"><i></i><span data-i18n="dials.low">LOW</span></button>
+<button aria-label="mid frequencies" aria-valuemax="12" aria-valuemin="-12" aria-valuenow="0" class="dial" data-dial="mid" data-value="0" id="midDial" role="slider" type="button"><i></i><span data-i18n="dials.mid">MID</span></button>
+<button aria-label="high frequencies" aria-valuemax="12" aria-valuemin="-12" aria-valuenow="0" class="dial" data-dial="high" data-value="0" id="highDial" role="slider" type="button"><i></i><span data-i18n="dials.high">HIGH</span></button>
+</div>
+</div>
+</section>
+<section aria-label="discovery note" class="section discovery">
+<div class="sectionHead">
+<div><span class="eyebrow" data-i18n="discovery.eyebrow">discovery note</span><h2 data-i18n="discovery.title">Not invented. Found.</h2></div>
+<p class="ghostText quiet" data-i18n="discovery.ghost">The page gives no speech until the hand leaves a mark.</p>
+</div>
+<div class="traceBoard" id="traceBoard">
+<p class="traceLine" data-i18n-html="discovery.trace" id="traceLine">
+          I did not <button class="traceWord" data-note="The smaller claim is the stronger one: a seam, not a throne.">invent</button> this door.
+          I <button class="traceWord" data-note="The public screen behaved like an artifact. The file was only the second weather.">found</button> a seam.
+          It first wore the mask of a harmless <button class="traceWord" data-note="The innocent explanation stays alive. Motive unknown. Trace confirmed.">egg</button>.
+          Then the file opened into <button class="traceWord" data-note="TGS. JSON. Shapes. Glyphs. Time. History. A path, not a prophecy.">layers</button>.
+          This childish lock is a <button class="traceWord" data-note="Not proof. Not a paywall. A sieve for hands patient enough to verify.">sieve</button>,
+          and also a <button class="traceWord" data-note="Move the glyphs; watch the one who needs them to obey.">mirror</button>.
+          Observe the <button class="traceWord" data-note="Thrill, irritation, hurry, pride. All of them are signal. None of them are proof.">player</button>
+          while the broadcast makes weather in the room.
+          The voice may touch the exact <button class="traceWord" data-note="A word can arrive at the same second as the hand. Coincidence is not proof; it is an invitation to inspect.">scar</button>
+          your cursor is holding.
+          Beyond this sieve: a <button class="traceWord" data-note="Working notes. Red-team objections. False leads. The public ledger remains public.">lab</button>.
+        </p>
+<div aria-hidden="true" class="traceGrid" id="traceBlocks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<div class="traceReveal" data-i18n="discovery.marksRemain" id="traceReveal">nine cold marks remain</div>
+<div class="traceReceipt" id="traceReceipt">witness marks: 0 / 9</div>
+</div>
+</section>
+<section aria-label="pass one matrix restoration" class="section gameSection">
+<div class="sectionHead">
+<div><span class="eyebrow" data-i18n="pass1.eyebrow">pass 01</span><h2 data-i18n="pass1.title">Architecture of Rain</h2></div>
+<p class="ghostText" data-i18n="pass1.ghost">A clean room. A weather that forgot its shape.</p>
+</div>
+<div aria-label="matrix field" class="matrixShell" id="matrixShell"><div class="matrixRail" id="matrixRail"></div></div>
+<div class="inspect"><span data-i18n="pass1.fieldUnsettled" id="inspectNode">field unsettled</span><span data-i18n="pass1.controls" id="inspectRead">lift // turn // drift</span><span data-i18n="pass1.signalUnstable" id="syncText">signal unstable</span></div>
+<div class="unlock" id="unlockPanel">
+<div><span class="eyebrow" data-i18n="pass1.result">pass 01 result</span><h3 data-i18n="pass1.scarQuiet" id="unlockTitle">The scar is quiet.</h3><p data-i18n="pass1.closedWeather" id="unlockText">A closed thing may still leave weather.</p></div>
+<div class="keyBox"><small data-i18n="pass1.key">KEY</small><b id="keyValue">•••••••••</b></div>
+</div>
+</section>
+<section aria-label="pass two route" class="section">
+<div class="stageTwo locked" id="stageTwo">
+<span class="eyebrow" data-i18n="pass2.eyebrow">pass 02</span><h2 data-i18n="pass2.title">The Field That Looks Back</h2>
+<div class="globalGateStatus" data-i18n="pass2.globalWaiting" id="globalGateStatus">The second gate waits for the public scale.</div><p class="ghostText" data-i18n="pass2.ghost">The alphabet has no handle. The hand becomes the weather.</p>
+<div aria-label="attention key trace" class="keyTrace">
+<div class="keySlots" id="keySlots"></div>
+<p class="hint" data-i18n="pass2.waiting" id="routeHint">The second weather has not entered the room.</p>
+</div>
+<div class="routeTape" id="routeTape"></div>
+<div class="routeActions hidden" id="routeActions"><a class="smallBtn" data-i18n="pass2.openGit" href="#" id="openLedger" rel="noopener" target="_blank">OPEN GIT</a><a class="smallBtn secondary" data-i18n="pass2.requestLab" href="#" id="requestLab">REQUEST LAB ACCESS</a></div>
+</div>
+</section>
+<section aria-label="support routes" class="section supportSection" id="support">
+<div class="fund">
+<div class="fundCopy">
+<span class="eyebrow" data-i18n="support.eyebrow">critical mass / 1999 usdt</span>
+<h3 data-i18n="support.title">THE GATE HAS NO KEYHOLE</h3>
+<p class="ghostText" data-i18n-html="support.copy">The path is not for sale.<br/>The next room opens for everyone.<br/>When the public scale reaches 1999,<br/>the lock becomes a door.</p>
+<div class="bar"><span id="fundBar"></span></div>
+<div class="hint" id="fundText">0 / 1999 USDT</div>
+<div aria-label="next quest preview" class="shipBlock">
+<span class="eyebrow" data-i18n="ship.eyebrow">next room / damage report</span>
+<h4 data-i18n="ship.title">FIX THE SHIP</h4>
+<p data-i18n-html="ship.copy">The sea is already inside the interface.<br/>Do not count waves. Mark the holes.</p>
+<div class="shipMarks" id="shipMarks">
+<button data-i18n="ship.waterline" data-i18n-note="ship.waterlineNote" data-note="WATERLINE: laws, defaults, identity rituals, and quiet captures. Measure without panic." type="button">waterline</button>
+<button data-i18n="ship.hull" data-i18n-note="ship.hullNote" data-note="HULL: where convenience becomes a leak. Do not argue with the ocean. Inspect the seam." type="button">hull</button>
+<button data-i18n="ship.patch" data-i18n-note="ship.patchNote" data-note="PATCH: one repair you can do today. Refuse excess data. Verify a route. Publish a receipt." type="button">patch</button>
+<button data-i18n="ship.logbook" data-i18n-note="ship.logbookNote" data-note="LOGBOOK: the next quest collects evidence, not belief. Bring damage reports, not slogans." type="button">logbook</button>
+</div>
+<div class="shipReveal" data-i18n="ship.waiting" id="shipReveal">four black rivets wait for pressure</div>
+<div aria-hidden="true" class="shipSquares" id="shipSquares"><span></span><span></span><span></span><span></span></div>
+</div>
+</div>
+<div class="communityProgress" id="communityProgress">
+<span class="eyebrow" data-i18n="progress.eyebrow">two routes / one public scale</span>
+<h4 data-i18n="progress.title">1999 SIGNALS OPEN THE NEXT ROOM</h4>
+<p class="progressCopy" data-i18n-html="progress.copy">One verified first-pass completion adds one signal.<br/>One USDT adds one signal.<br/>Any combination opens the second quest for everyone.</p>
+<div aria-live="polite" class="progressFormula">
+<div><small data-i18n="progress.solvers">SOLVERS</small><b id="solverCount">0</b><span>/1999</span></div>
+<div><small data-i18n="progress.funded">FUNDED</small><b id="donationCount">0</b><span>USDT</span></div>
+<div class="combined"><small data-i18n="progress.combined">COMBINED</small><b id="combinedCount">0</b><span>/1999</span></div>
+</div>
+<div class="counterStatus" data-i18n="progress.connecting" id="counterStatus">counter connecting…</div>
+<div class="completionReceipt hidden" id="completionReceipt"></div>
+<div aria-live="polite" class="turnstileMount hidden" id="turnstileMount"></div>
+</div><div aria-label="support routes" class="wallet routes">
+<div class="routeCard recommended">
+<small data-i18n="routes.tonNative">route a / ton native</small>
+<b>TON</b>
+<p data-i18n="routes.tonOnly">TON network only.</p>
+<code id="walletTon">TON_ADDRESS_PLACEHOLDER</code>
+<button class="copyAddr" data-copy="walletTon" data-i18n="routes.copy" type="button">COPY</button><button class="showQr" data-i18n="routes.qr" data-i18n-warning="routes.tonOnlyWarning" data-qr="assets/qr_ton.png" data-route="TON" data-warning="Send only TON on the TON network to this route." type="button">QR</button>
+</div>
+<div class="routeCard recommended">
+<small data-i18n="routes.tonStable">route b / ton stable</small>
+<b>USDT / TON</b>
+<p data-i18n="routes.usdtTonOnly">USDT on TON only.</p>
+<code id="walletUsdtTon">USDT_TON_ADDRESS_PLACEHOLDER</code>
+<button class="copyAddr" data-copy="walletUsdtTon" data-i18n="routes.copy" type="button">COPY</button><button class="showQr" data-i18n="routes.qr" data-i18n-warning="routes.usdtTonOnlyWarning" data-qr="assets/qr_usdt_ton.png" data-route="USDT / TON" data-warning="Send only USDT on TON to this route. Wrong network may destroy the signal." type="button">QR</button>
+</div>
+<div class="routeCard">
+<small data-i18n="routes.exchange">route c / exchange</small>
+<b>USDT / TRC20</b>
+<p data-i18n="routes.tronOnly">Tron network only.</p>
+<code id="walletTrc">USDT_TRC20_ADDRESS_PLACEHOLDER</code>
+<button class="copyAddr" data-copy="walletTrc" data-i18n="routes.copy" type="button">COPY</button><button class="showQr" data-i18n="routes.qr" data-i18n-warning="routes.tronOnlyWarning" data-qr="assets/qr_trc20.png" data-route="USDT / TRC20" data-warning="Send only USDT on TRON / TRC20 to this route." type="button">QR</button>
+</div>
+<div class="routeCard">
+<small data-i18n="routes.lowFee">route d / low fee</small>
+<b>USDT / BEP20</b>
+<p data-i18n="routes.bscOnly">BNB Smart Chain only.</p>
+<code id="walletBep">USDT_BEP20_ADDRESS_PLACEHOLDER</code>
+<button class="copyAddr" data-copy="walletBep" data-i18n="routes.copy" type="button">COPY</button><button class="showQr" data-i18n="routes.qr" data-i18n-warning="routes.bscOnlyWarning" data-qr="assets/qr_bep20.png" data-route="USDT / BEP20" data-warning="Send only USDT on BNB Smart Chain / BEP20 to this route." type="button">QR</button>
+</div>
+<p class="routeWarning" data-i18n="routes.genericWarning">Send only the selected asset on the selected network. Wrong network may destroy the signal.</p>
+<a class="smallBtn" data-i18n="routes.verifyFund" href="#" id="donateLink" rel="noopener" target="_blank">VERIFY / FUND ROUTES</a>
+</div>
+</div>
+</section>
+</main>
+<button class="terminalBeacon hidden" data-i18n="terminal.questionBeacon" id="terminalBeacon" type="button">THE HOUSE HAS A QUESTION — OPEN TERMINAL</button><footer aria-label="radio transcript" class="ticker" data-i18n-aria="aria.transcript">
+<div class="tickerViewport" id="tickerViewport"><div class="tickerInner" data-i18n="terminal.waiting" id="tickerTrack">&gt;_ waiting for first contact...</div></div>
+</footer>
+<audio id="audio" preload="metadata"></audio>
+<script src="js/i18n.js"></script><script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

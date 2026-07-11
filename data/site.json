@@ -1,0 +1,66 @@
+{
+  "station": "THE LAST SAFE HOUSE",
+  "case": "CASE 001 / FOLLOW WHITE DUCK",
+  "domain": "whiteduck.online",
+  "publicLedgerUrl": "https://github.com/followhiteduck/wire",
+  "finalRouteUrl": "https://github.com/followhiteduck",
+  "privateLab": "https://github.com/followhiteduck/lab",
+  "accessContact": "mailto:access@whiteduck.online?subject=WD-ATTENTION-FHD-41&body=proof:%20WD-ATTENTION-FHD-41%0AGitHub:%20",
+  "proofPrefix": "WD",
+  "funding": {
+    "label": "NEXT ROOM",
+    "current": 0,
+    "target": 1999,
+    "currency": "USDT",
+    "donateUrl": "DONATION_URL_PLACEHOLDER",
+    "usdtTonAddress": "TLjgLUAFBAt1cNX38Unb5nGVRcQADHeBj6",
+    "usdtTrc20Address": "TUtwSmeEzUqoVmojV4AmB739NXRvaCYsVq",
+    "usdtBep20Address": "0xF188a90b09440C5EFEa4C3D34F032B45f99fC436",
+    "routes": {
+      "ton": {
+        "address": "UQCVgI4MqdySoxO-CFO1UeN0V9nys2K6JSpTcBtwpuvmoDFo",
+        "qr": "assets/qr_ton.png",
+        "label": "TON",
+        "warning": "Send only TON on the TON network to this route."
+      },
+      "usdtTon": {
+        "address": "TLjgLUAFBAt1cNX38Unb5nGVRcQADHeBj6",
+        "qr": "assets/qr_usdt_ton.png",
+        "label": "USDT / TON",
+        "warning": "Send only USDT on TON to this route. Do not use TRC20/BEP20 here."
+      },
+      "trc20": {
+        "address": "TUtwSmeEzUqoVmojV4AmB739NXRvaCYsVq",
+        "qr": "assets/qr_trc20.png",
+        "label": "USDT / TRC20",
+        "warning": "Send only USDT on TRON / TRC20 to this route."
+      },
+      "bep20": {
+        "address": "0xF188a90b09440C5EFEa4C3D34F032B45f99fC436",
+        "qr": "assets/qr_bep20.png",
+        "label": "USDT / BEP20",
+        "warning": "Send only USDT on BNB Smart Chain / BEP20 to this route."
+      }
+    },
+    "note": "Routes are displayed exactly as provided by the operator. Always verify the asset and network in your wallet before sending.",
+    "tonAddress": "UQCVgI4MqdySoxO-CFO1UeN0V9nys2K6JSpTcBtwpuvmoDFo"
+  },
+  "ledgerUrl": "https://github.com/followhiteduck/wire",
+  "labUrl": "https://github.com/followhiteduck/lab",
+  "subtitleCps": 34,
+  "progress": {
+    "apiUrl": "https://api.whiteduck.online",
+    "target": 1999,
+    "pointsPerCompletion": 1,
+    "pointsPerUsdt": 1,
+    "pollMs": 30000,
+    "turnstileSiteKey": "TURNSTILE_SITE_KEY_PLACEHOLDER",
+    "autoAuditSeconds": 75,
+    "autoAuditMatrixMoves": 7,
+    "fallback": {
+      "completions": 0,
+      "donationCredits": 0,
+      "unlocked": false
+    }
+  }
+}

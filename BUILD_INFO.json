@@ -1,0 +1,19 @@
+{
+  "project": "The Last Safe House",
+  "version": "v29-bilingual-global-gate",
+  "buildDate": "2026-07-11",
+  "case": "CASE 001 / FOLLOW WHITE DUCK",
+  "domain": "whiteduck.online",
+  "features": [
+    "English and Russian interface",
+    "untranslated 37-column QR word-field",
+    "encrypted bilingual terminal oracle",
+    "persistent Passenger Audit",
+    "1999-signal public gate",
+    "one verified Pass 1 completion equals one signal",
+    "one verified whole USDT equals one signal",
+    "Cloudflare Worker and D1 counter backend",
+    "server-side Turnstile verification",
+    "encrypted Track 15 unlock path"
+  ]
+}
