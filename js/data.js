@@ -6182,7 +6182,7 @@ window.WDR_DATA = {
       "pointsPerCompletion": 1,
       "pointsPerUsdt": 1,
       "pollMs": 30000,
-      "turnstileSiteKey": "TURNSTILE_SITE_KEY_PLACEHOLDER",
+      "turnstileSiteKey": "0x4AAAAAAD0CFbUtE0kdqQqa",
       "autoAuditSeconds": 75,
       "autoAuditMatrixMoves": 7,
       "fallback": {
