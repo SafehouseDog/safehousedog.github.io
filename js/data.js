@@ -6177,7 +6177,7 @@ window.WDR_DATA = {
     "labUrl": "https://github.com/followhiteduck/lab",
     "subtitleCps": 34,
     "progress": {
-      "apiUrl": "https://api.whiteduck.online",
+      "apiUrl": "https://last-safe-house-counter.whiteduck.workers.dev",
       "target": 1999,
       "pointsPerCompletion": 1,
       "pointsPerUsdt": 1,
