@@ -225,3 +225,229 @@ body.auditComplete .shipBlock{box-shadow:inset 3px 0 0 #111;padding-left:18px}
   .terminalBeacon{bottom:76px;font-size:9px;padding:10px 13px}
   .auditMark{display:none}
 }
+
+
+/* v35 — original layout restored + protocol/wave entry */
+:root{
+  --display:-apple-system,BlinkMacSystemFont,"Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
+}
+.topline{height:76px}
+.brandLogo{display:inline-flex!important;align-items:center!important;line-height:0!important;min-width:0!important}
+.brandLogo img{display:block!important;height:54px!important;width:auto!important;max-width:min(44vw,560px)!important;object-fit:contain!important}
+.brandLogoCenter img{height:78px!important;max-width:min(76vw,900px)!important}
+.toplineCenter{gap:14px!important;padding:14px 0 12px!important;min-height:118px!important}
+.statusCenter{flex-wrap:wrap}
+
+.trackTitle,
+.protocolHead h2,
+.section h2,
+.section h3,
+.fundCopy h3,
+.shipBlock h4,
+.communityProgress h4,
+.stageTwo h2,
+.unlock h3{
+  font-family:var(--display);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.11em!important;
+  line-height:1.05;
+}
+.trackTitle{font-size:clamp(28px,3.9vw,44px);margin-top:10px;letter-spacing:.14em!important}
+.protocolHead h2{font-size:clamp(30px,4.4vw,52px);margin:10px 0 0;letter-spacing:.17em!important;line-height:1.04}
+.section h2,.stageTwo h2{letter-spacing:.12em!important;line-height:1.06}
+.section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.1em!important;line-height:1.08}
+html[lang="ru"] .trackTitle,
+html[lang="ru"] .protocolHead h2,
+html[lang="ru"] .section h2,
+html[lang="ru"] .stageTwo h2{letter-spacing:.075em!important}
+html[lang="ru"] .section h3,
+html[lang="ru"] .fundCopy h3,
+html[lang="ru"] .shipBlock h4,
+html[lang="ru"] .communityProgress h4,
+html[lang="ru"] .unlock h3{letter-spacing:.06em!important}
+
+.protocolSignalWrap{display:flex;flex-direction:column;align-items:center;margin:28px 0 16px;cursor:crosshair}
+.signalStageInline{
+  position:relative;
+  width:min(300px,70vw);
+  height:min(300px,70vw);
+  border:0;
+  border-radius:22px;
+  background:#fff;
+  overflow:hidden;
+  display:block;
+}
+.signalStageInline::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(255,255,255,.46),rgba(255,255,255,0) 32%,rgba(0,0,0,.018));
+}
+.signalStageInline::after{display:none}
+.signalCanvas{position:absolute;inset:0;z-index:2;width:100%;height:100%}
+.signalLabel{display:none!important}
+.signalQr{width:min(300px,70vw);height:min(300px,70vw);object-fit:contain;filter:grayscale(1) contrast(1.06);mix-blend-mode:multiply}
+.protocolSignalWrap .tuneInline{margin-top:18px}
+.protocolBlock{width:100%;margin-top:28px;padding-top:24px;border-top:1px solid var(--line);text-align:left}
+.protocolBlock.complete{border-top-color:#111}
+.protocolHead{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.protocolVersion{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#888;border:1px solid var(--line);border-radius:999px;padding:6px 9px;white-space:nowrap}
+.protocolIntro{font-family:var(--mono);font-size:12px;line-height:1.65;color:#666;margin:16px 0 18px}
+.manifest{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.manifestLine{font-family:var(--sans);font-size:14px;line-height:1.72;color:#111;margin:0;padding:11px 0;border-bottom:1px solid var(--line);letter-spacing:.015em}
+.manifestLine:last-child{border-bottom:0}
+.protocolForm{margin-top:18px}
+.protocolLabel{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:#777;margin-bottom:10px;text-transform:uppercase}
+.protocolAccessRow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:stretch}
+.protocolAccessRow input{
+  min-width:0;border:1px solid var(--line2);border-radius:16px;padding:13px 16px;background:#fff;color:#111;
+  font-family:var(--mono);font-size:12px;outline:none;letter-spacing:.07em;text-transform:uppercase;
+}
+.protocolAccessRow input:focus{border-color:#111;box-shadow:0 0 0 3px rgba(0,0,0,.05)}
+.protocolAccessRow button{
+  border:1px solid #111;border-radius:999px;background:#111;color:#fff;padding:12px 18px;min-width:180px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;white-space:nowrap;
+}
+.protocolAccessRow button:disabled,.protocolAccessRow input:disabled{opacity:.56;cursor:default}
+.protocolFeedback{min-height:18px;margin:10px 0 0;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#777}
+.protocolFeedback.error{color:#9d1515}.protocolFeedback.success{color:#111;font-weight:700}
+.casePreviewInline{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.casePreviewInline .eyebrow{display:block;margin-bottom:3px}
+.casePreviewInline h3{margin:8px 0 8px}
+.casePreviewInline .ghostText{max-width:none}
+.caseStatus{display:inline-flex;margin-top:16px;border:1px solid #111;border-radius:999px;padding:8px 12px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.casePreviewInline.unlocked .caseStatus{background:#111;color:#fff}
+.protocolTerminalNote{margin-top:14px;font-family:var(--mono);font-size:10px;line-height:1.55;color:#888}
+
+/* legacy watcher kept */
+.watcher{right:18px;bottom:68px}
+
+@media(max-width:900px){
+  .brandLogo img{height:36px!important;max-width:min(56vw,330px)!important}
+  .brandLogoCenter img{height:54px!important;max-width:min(88vw,540px)!important}
+  .toplineCenter{min-height:104px!important}
+  .trackTitle{font-size:clamp(24px,6.7vw,38px);letter-spacing:.11em!important}
+  .protocolHead h2{font-size:clamp(28px,8vw,42px)!important;letter-spacing:.13em!important}
+}
+@media(max-width:680px){
+  .protocolAccessRow{grid-template-columns:1fr}
+  .protocolAccessRow button{width:100%;min-width:0}
+  .signalStageInline,.signalQr{width:240px;height:240px}
+  .signalLabel{display:none!important}
+}
+@media(max-width:540px){
+  .brandLogo img{height:30px!important;max-width:62vw!important}
+  .brandLogoCenter img{height:42px!important;max-width:92vw!important}
+  .toplineCenter{min-height:96px!important}
+  .protocolBlock{margin-top:24px;padding-top:20px}
+  .protocolHead{flex-direction:column;gap:10px}
+  .protocolHead h2{letter-spacing:.11em!important}
+  html[lang="ru"] .protocolHead h2{letter-spacing:.07em!important}
+  .section h2,.stageTwo h2{letter-spacing:.09em!important}
+  .section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.08em!important}
+  .manifestLine{font-size:13px;line-height:1.68}
+}
+
+/* v36 — restrained heading tracking */
+.trackTitle{letter-spacing:.07em!important}
+.protocolHead h2{letter-spacing:.09em!important}
+.section h2,.stageTwo h2{letter-spacing:.065em!important}
+.section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.05em!important}
+html[lang="ru"] .trackTitle{letter-spacing:.045em!important}
+html[lang="ru"] .protocolHead h2{letter-spacing:.055em!important}
+html[lang="ru"] .section h2,html[lang="ru"] .stageTwo h2{letter-spacing:.04em!important}
+html[lang="ru"] .section h3,html[lang="ru"] .fundCopy h3,html[lang="ru"] .shipBlock h4,html[lang="ru"] .communityProgress h4,html[lang="ru"] .unlock h3{letter-spacing:.03em!important}
+@media(max-width:900px){
+  .trackTitle{letter-spacing:.06em!important}
+  .protocolHead h2{letter-spacing:.075em!important}
+  .section h2,.stageTwo h2{letter-spacing:.055em!important}
+  .section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.04em!important}
+  html[lang="ru"] .trackTitle{letter-spacing:.035em!important}
+  html[lang="ru"] .protocolHead h2{letter-spacing:.045em!important}
+  html[lang="ru"] .section h2,html[lang="ru"] .stageTwo h2{letter-spacing:.032em!important}
+}
+@media(max-width:540px){
+  .trackTitle{letter-spacing:.05em!important}
+  .protocolHead h2{letter-spacing:.065em!important}
+  .section h2,.stageTwo h2{letter-spacing:.05em!important}
+  .section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.035em!important}
+  html[lang="ru"] .trackTitle{letter-spacing:.028em!important}
+  html[lang="ru"] .protocolHead h2{letter-spacing:.038em!important}
+  html[lang="ru"] .section h2,html[lang="ru"] .stageTwo h2{letter-spacing:.028em!important}
+}
+
+
+/* v37: lighter tracking + cleaner signal stage */
+.trackTitle{letter-spacing:.042em!important}
+.protocolHead h2{letter-spacing:.054em!important}
+.section h2,.stageTwo h2{letter-spacing:.042em!important}
+.section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.028em!important}
+html[lang="ru"] .trackTitle{letter-spacing:.022em!important}
+html[lang="ru"] .protocolHead h2{letter-spacing:.03em!important}
+html[lang="ru"] .section h2,html[lang="ru"] .stageTwo h2{letter-spacing:.022em!important}
+html[lang="ru"] .section h3,html[lang="ru"] .fundCopy h3,html[lang="ru"] .shipBlock h4,html[lang="ru"] .communityProgress h4,html[lang="ru"] .unlock h3{letter-spacing:.018em!important}
+@media(max-width:720px){
+  .trackTitle{letter-spacing:.036em!important}
+  .protocolHead h2{letter-spacing:.046em!important}
+  .section h2,.stageTwo h2{letter-spacing:.036em!important}
+  .section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.024em!important}
+  html[lang="ru"] .trackTitle{letter-spacing:.018em!important}
+  html[lang="ru"] .protocolHead h2{letter-spacing:.026em!important}
+  html[lang="ru"] .section h2,html[lang="ru"] .stageTwo h2{letter-spacing:.018em!important}
+  html[lang="ru"] .section h3,html[lang="ru"] .fundCopy h3,html[lang="ru"] .shipBlock h4,html[lang="ru"] .communityProgress h4,html[lang="ru"] .unlock h3{letter-spacing:.015em!important}
+}
+
+
+/* v38: refined typography + cleaner wave stage */
+.trackTitle,
+.protocolHead h2,
+.section h2,
+.section h3,
+.fundCopy h3,
+.shipBlock h4,
+.communityProgress h4,
+.stageTwo h2,
+.unlock h3{
+  font-family:var(--display)!important;
+  font-weight:600!important;
+  text-transform:uppercase!important;
+  letter-spacing:.074em!important;
+  line-height:1.03!important;
+}
+.trackTitle{font-size:clamp(28px,3.8vw,42px)!important;margin-top:10px!important;letter-spacing:.082em!important}
+.protocolHead h2{font-size:clamp(30px,4.1vw,48px)!important;letter-spacing:.096em!important;line-height:1.02!important}
+.section h2,.stageTwo h2{letter-spacing:.078em!important}
+.section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.058em!important;line-height:1.05!important}
+html[lang="ru"] .trackTitle{letter-spacing:.036em!important}
+html[lang="ru"] .protocolHead h2{letter-spacing:.046em!important}
+html[lang="ru"] .section h2,html[lang="ru"] .stageTwo h2{letter-spacing:.038em!important}
+html[lang="ru"] .section h3,html[lang="ru"] .fundCopy h3,html[lang="ru"] .shipBlock h4,html[lang="ru"] .communityProgress h4,html[lang="ru"] .unlock h3{letter-spacing:.03em!important}
+@media(max-width:900px){
+  .trackTitle{font-size:clamp(24px,6vw,36px)!important;letter-spacing:.066em!important}
+  .protocolHead h2{font-size:clamp(27px,7vw,40px)!important;letter-spacing:.076em!important}
+  .section h2,.stageTwo h2{letter-spacing:.066em!important}
+  .section h3,.fundCopy h3,.shipBlock h4,.communityProgress h4,.unlock h3{letter-spacing:.048em!important}
+  html[lang="ru"] .trackTitle{letter-spacing:.03em!important}
+  html[lang="ru"] .protocolHead h2{letter-spacing:.038em!important}
+  html[lang="ru"] .section h2,html[lang="ru"] .stageTwo h2{letter-spacing:.03em!important}
+  html[lang="ru"] .section h3,html[lang="ru"] .fundCopy h3,html[lang="ru"] .shipBlock h4,html[lang="ru"] .communityProgress h4,html[lang="ru"] .unlock h3{letter-spacing:.024em!important}
+}
+.signalStageInline{
+  width:min(292px,68vw)!important;
+  height:min(292px,68vw)!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+  box-shadow:none!important;
+}
+.signalStageInline::before,.signalStageInline::after{display:none!important;content:none!important}
+.signalCanvas{display:block!important;background:transparent!important}
+.protocolSignalWrap{margin:24px 0 12px!important}
+.protocolBlock{margin-top:22px!important;padding-top:22px!important}
+.protocolIntro{margin:14px 0 16px!important}
+.manifestLine{padding:10px 0!important;line-height:1.68!important}
+.radioCard{padding:26px 26px 30px!important}
+@media(max-width:540px){
+  .radioCard{padding:20px 18px 24px!important}
+  .signalStageInline{width:min(260px,72vw)!important;height:min(260px,72vw)!important}
+}

@@ -191,5 +191,12 @@
     "37": 6
   },
   "routeMode": "KEYTRACE_ANY_MATCH",
-  "proofCode": "WD-ATTENTION-FHD-41"
+  "proofCode": "WD-ATTENTION-FHD-41",
+  "protocol0": {
+    "answers": [
+      "OPENTHELOCK",
+      "ОТКРОЙЗАМОК"
+    ],
+    "storageKey": "lsh_protocol0_unlocked_v1"
+  }
 }

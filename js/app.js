@@ -11,7 +11,9 @@
     unlockTitle:$('unlockTitle'), unlockText:$('unlockText'), keyValue:$('keyValue'), stageTwo:$('stageTwo'), keySlots:$('keySlots'), routeHint:$('routeHint'), routeTape:$('routeTape'),
     routeActions:$('routeActions'), openLedger:$('openLedger'), requestLab:$('requestLab'), fundText:$('fundText'), fundBar:$('fundBar'), topFund:$('topFund'), walletTon:$('walletTon'), walletUsdtTon:$('walletUsdtTon'), walletTrc:$('walletTrc'), walletBep:$('walletBep'),
     toast:$('toast'), traceReveal:$('traceReveal'), traceReceipt:$('traceReceipt'), traceGrid:document.querySelectorAll('.traceGrid span'), watcher:$('watcher'), watcherMark:$('watcherMark'), watcherKoan:$('watcherKoan'), shipReveal:$('shipReveal'), shipSquares:$('shipSquares'), volDial:$('volDial'), lowDial:$('lowDial'), midDial:$('midDial'), highDial:$('highDial'), qrModal:$('qrModal'), qrClose:$('qrClose'), qrRouteImage:$('qrRouteImage'), qrRouteLabel:$('qrRouteLabel'), qrRouteWarning:$('qrRouteWarning'),
-    solverCount:$('solverCount'), donationCount:$('donationCount'), combinedCount:$('combinedCount'), counterStatus:$('counterStatus'), completionReceipt:$('completionReceipt'), turnstileMount:$('turnstileMount'), terminalBeacon:$('terminalBeacon'), globalGateStatus:$('globalGateStatus'), communityProgress:$('communityProgress')
+    solverCount:$('solverCount'), donationCount:$('donationCount'), combinedCount:$('combinedCount'), counterStatus:$('counterStatus'), completionReceipt:$('completionReceipt'), turnstileMount:$('turnstileMount'), terminalBeacon:$('terminalBeacon'), globalGateStatus:$('globalGateStatus'), communityProgress:$('communityProgress'),
+    protocolForm:$('protocolForm'), protocolInput:$('protocolInput'), protocolFeedback:$('protocolFeedback'), protocolSubmit:$('protocolSubmit'), protocolCard:$('protocolCard'), signalStage:$('signalStage'), signalCanvas:$('signalCanvas'), protocolRevealGif:$('protocolRevealGif'),
+    caseOne:$('caseOne'), casePreview:$('casePreview'), caseStatus:$('caseStatus'), headerCase:$('headerCase'), topFund:$('topFund')
   };
 
   const nodesById = new Map(D.nodes.map(n => [n.id, n]));
@@ -31,6 +33,7 @@
   let drag = null;
   let fallbackTimer = null;
   let fallbackT = 0;
+  let fallbackStartedAt = 0;
   let fallbackAudioCtx = null;
   let fallbackOsc = null;
   let fallbackGain = null;
@@ -59,12 +62,20 @@
   let auditWaterNudged = false;
   let auditStartedByAuto = false;
   let terminalEverUsed = false;
+  const protocolStorageKey = D.quest?.protocol0?.storageKey || 'lsh_protocol0_unlocked_v1';
+  let protocolUnlocked = (() => { try { return localStorage.getItem(protocolStorageKey) === '1'; } catch(_e) { return false; } })();
+  const protocolStartedAt = Date.now();
+  let protocolHintStage = -1;
   let audioCtx = null;
   let mediaSource = null;
   let masterGain = null;
   let lowFilter = null;
   let midFilter = null;
   let highFilter = null;
+  let analyser = null;
+  let analyserData = null;
+  let signalCanvasCtx = null;
+  let signalVisualRAF = 0;
   let watcherTypeTimer = null;
   let lyricScale = 1;
   let lyricOffset = 0;
@@ -219,6 +230,107 @@
     }
     for (i = 0; i < 8; i++) for (j = 3; j + 1; j--) { let b = (hash[i] >> (j*8)) & 255; result += ((b < 16) ? 0 : '') + b.toString(16); }
     return result;
+  }
+
+  function normalizeProtocolAnswer(value){
+    return String(value || '')
+      .normalize('NFKC')
+      .toUpperCase()
+      .replace(/[^A-ZА-ЯЁ0-9]+/g, '');
+  }
+
+  function protocolAnswers(){
+    const list = D.quest?.protocol0?.answers;
+    return (Array.isArray(list) ? list : ['OPENTHELOCK','ОТКРОЙЗАМОК']).map(normalizeProtocolAnswer);
+  }
+
+  function setProtocolFeedback(message, state=''){
+    if(!els.protocolFeedback) return;
+    els.protocolFeedback.textContent = message || '';
+    els.protocolFeedback.classList.remove('error','success');
+    if(state) els.protocolFeedback.classList.add(state);
+  }
+
+  function showProtocolTerminal(key, force=false){
+    if(protocolUnlocked) return;
+    const broadcastBusy = started && !userPaused;
+    if(!force && (terminalActive || auditState || broadcastBusy)) return;
+    terminalResponse = t(key);
+    terminalResponseUntil = force ? Date.now() + 24000 : Date.now() + 21000;
+    renderTerminalPrompt(true);
+  }
+
+  function maybeProtocolHint(){
+    if(protocolUnlocked || terminalActive || auditState) return;
+    const elapsed = (Date.now() - protocolStartedAt) / 1000;
+    let stage = elapsed >= 80 ? 3 : elapsed >= 50 ? 2 : elapsed >= 25 ? 1 : 0;
+    if(stage <= protocolHintStage) return;
+    const keys = [
+      'protocol0.terminal.boot',
+      'protocol0.terminal.aligned',
+      'protocol0.terminal.downward',
+      'protocol0.terminal.edge'
+    ];
+    const broadcastBusy = started && !userPaused;
+    if(broadcastBusy) return;
+    protocolHintStage = stage;
+    showProtocolTerminal(keys[stage], true);
+  }
+
+  function applyProtocolState({scroll=false} = {}){
+    document.body.classList.toggle('protocolUnlocked', protocolUnlocked);
+    els.caseOne?.classList.toggle('hidden', !protocolUnlocked);
+    els.caseOne?.setAttribute('aria-hidden', protocolUnlocked ? 'false' : 'true');
+    els.casePreview?.classList.toggle('unlocked', protocolUnlocked);
+    els.protocolCard?.classList.toggle('complete', protocolUnlocked);
+    els.topFund?.classList.toggle('hidden', !protocolUnlocked);
+    if(els.headerCase){
+      els.headerCase.dataset.i18n = protocolUnlocked ? 'header.case' : 'header.protocol';
+      els.headerCase.textContent = t(protocolUnlocked ? 'header.case' : 'header.protocol');
+    }
+    if(els.caseStatus){
+      els.caseStatus.dataset.i18n = protocolUnlocked ? 'casePreview.unlocked' : 'casePreview.locked';
+      els.caseStatus.textContent = t(protocolUnlocked ? 'casePreview.unlocked' : 'casePreview.locked');
+    }
+    if(els.protocolInput){
+      els.protocolInput.disabled = protocolUnlocked;
+      if(protocolUnlocked) els.protocolInput.value = lang() === 'ru' ? 'ОТКРОЙ ЗАМОК' : 'OPEN THE LOCK';
+    }
+    if(els.protocolSubmit){
+      els.protocolSubmit.disabled = protocolUnlocked;
+      els.protocolSubmit.textContent = protocolUnlocked ? t('protocol0.opened') : t('protocol0.submit');
+    }
+    if(els.signalStage) els.signalStage.classList.toggle('hidden', protocolUnlocked);
+    if(els.protocolRevealGif) els.protocolRevealGif.classList.toggle('hidden', !protocolUnlocked);
+    if(protocolUnlocked) setProtocolFeedback(t('protocol0.accepted'), 'success');
+    if(scroll && protocolUnlocked){
+      window.setTimeout(() => (els.caseOne || els.casePreview)?.scrollIntoView({behavior:'smooth', block:'start'}), 260);
+    }
+  }
+
+  function unlockProtocol(){
+    protocolUnlocked = true;
+    try{ localStorage.setItem(protocolStorageKey, '1'); }catch(_e){}
+    terminalResponse = t('protocol0.terminal.accepted');
+    terminalResponseUntil = Date.now() + 26000;
+    renderTerminalPrompt(true);
+    applyProtocolState({scroll:true});
+  }
+
+  function initProtocol(){
+    applyProtocolState();
+    els.protocolForm?.addEventListener('submit', e => {
+      e.preventDefault();
+      if(protocolUnlocked) return;
+      const answer = normalizeProtocolAnswer(els.protocolInput?.value);
+      if(protocolAnswers().includes(answer)){
+        unlockProtocol();
+      }else{
+        setProtocolFeedback(t('protocol0.noMatch'), 'error');
+        showProtocolTerminal('protocol0.terminal.wrong', true);
+        els.protocolInput?.select?.();
+      }
+    });
   }
 
   function renderMatrix(){
@@ -653,11 +765,15 @@
         midFilter = audioCtx.createBiquadFilter();
         highFilter = audioCtx.createBiquadFilter();
         masterGain = audioCtx.createGain();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 256;
+        analyser.smoothingTimeConstant = 0.72;
+        analyserData = new Uint8Array(analyser.frequencyBinCount);
         lowFilter.type = 'lowshelf'; lowFilter.frequency.value = 140; lowFilter.gain.value = 0;
         midFilter.type = 'peaking'; midFilter.frequency.value = 1100; midFilter.Q.value = 0.85; midFilter.gain.value = 0;
         highFilter.type = 'highshelf'; highFilter.frequency.value = 5200; highFilter.gain.value = 0;
         masterGain.gain.value = Math.max(0, Math.min(1, dialValue(els.volDial) / 100));
-        mediaSource.connect(lowFilter).connect(midFilter).connect(highFilter).connect(masterGain).connect(audioCtx.destination);
+        mediaSource.connect(lowFilter).connect(midFilter).connect(highFilter).connect(analyser).connect(masterGain).connect(audioCtx.destination);
       }
       audioCtx.resume?.();
       applyAudioSettings();
@@ -768,6 +884,11 @@
 
   function startBroadcast(){
     if(started) return;
+    if(!protocolUnlocked && !terminalActive && !auditState){
+      terminalResponse = '';
+      terminalResponseUntil = 0;
+      renderTerminalPrompt(true);
+    }
     started = true;
     userPaused = false;
     ensureRAF();
@@ -778,6 +899,8 @@
 
   function loadTrack(i, autoplay){
     stopFallback();
+    fallbackT = 0;
+    fallbackStartedAt = 0;
     if(!D.tracks.length) return;
     if(i < 0) i = D.tracks.length - 1;
     if(i >= D.tracks.length) i = 0;
@@ -785,24 +908,37 @@
     const tr = D.tracks[i];
     resetTicker(tr);
     setTitle(tr.id, tr.title.replace(/_/g, ' '));
-    els.audio.src = tr.src;
+    try{ els.audio.pause(); }catch(_e){}
+    try{ els.audio.removeAttribute('src'); els.audio.load?.(); }catch(_e){}
+    els.audio.src = encodeURI(tr.src);
     els.audio.preload = 'auto';
+    els.audio.setAttribute('playsinline','');
+    els.audio.setAttribute('webkit-playsinline','');
+    els.audio.crossOrigin = 'anonymous';
     els.seek.value = 0;
     els.time.textContent = '00:00';
     if(autoplay){
       userPaused = false;
       initAudioGraph();
       try{ els.audio.load?.(); }catch(_e){}
-      els.audio.play().then(() => updateRadioStatus(true)).catch(err => {
+      const playAttempt = () => els.audio.play().then(() => updateRadioStatus(true)).catch(err => {
         console.warn('play blocked or source unavailable', err);
+        const fileLabel = String(tr.src || '').split('/').pop() || 'audio';
         if(tr.secret || String(tr.src || '').startsWith('blob:')){
           userPaused = true;
           updateRadioStatus(false);
           toast(lang()==='ru' ? 'трек 15 готов — нажмите воспроизведение' : 'track 15 is armed — press play');
         } else {
+          toast((lang()==='ru' ? 'не удалось открыть ' : 'could not open ') + fileLabel);
           startFallbackCarrier();
         }
       });
+      if(els.audio.readyState >= 2){
+        playAttempt();
+      } else {
+        const onCanPlay = () => { els.audio.removeEventListener('canplay', onCanPlay); playAttempt(); };
+        els.audio.addEventListener('canplay', onCanPlay, {once:true});
+      }
     } else {
       updateRadioStatus(false);
     }
@@ -837,7 +973,8 @@
 
   function startFallbackCarrier(){
     if(userPaused || fallbackTimer) return;
-    fallbackT = 0;
+    fallbackT = Math.max(0, Number(fallbackT) || 0);
+    fallbackStartedAt = performance.now();
     toast(t('toast.audioMissing'));
     try{
       const Ctx = window.AudioContext || window.webkitAudioContext;
@@ -856,9 +993,9 @@
     }catch(_e){}
     updateRadioStatus(true);
     fallbackTimer = window.setInterval(() => {
-      fallbackT += 0.25;
+      const nowT = playbackTime();
       const tr = D.tracks[currentTrack];
-      if(tr && fallbackT > (tr.durationHint || 90)){
+      if(tr && nowT > (tr.durationHint || 90)){
         loadTrack(currentTrack + 1, false);
         fallbackT = 0;
         startFallbackCarrier();
@@ -867,7 +1004,12 @@
   }
 
   function stopFallback(){
-    if(fallbackTimer){ clearInterval(fallbackTimer); fallbackTimer = null; }
+    if(fallbackTimer){
+      fallbackT = playbackTime();
+      clearInterval(fallbackTimer);
+      fallbackTimer = null;
+      fallbackStartedAt = 0;
+    }
     if(fallbackGain) fallbackGain.gain.value = 0.0001;
   }
 
@@ -932,7 +1074,11 @@
 
   function playbackTime(){
     if(currentTrack < 0) return els.audio.currentTime || 0;
-    return fallbackTimer ? fallbackT : (els.audio.currentTime || 0);
+    if(fallbackTimer){
+      const elapsed = fallbackStartedAt ? (performance.now() - fallbackStartedAt) / 1000 : 0;
+      return Math.max(0, fallbackT + elapsed);
+    }
+    return els.audio.currentTime || 0;
   }
 
   function activeCueIndexAt(t){
@@ -982,11 +1128,11 @@
     const tr = D.tracks[currentTrack] || {};
     const literalMode = literalCueActive(cue);
     const lineText = signalLineForCue(cue, idx);
-    const cps = Number(tr?.subtitleCps || D.site?.subtitleCps || 34);
-    const typedTarget = lineText.length / Math.max(18, cps);
-    const minByCue = literalMode ? Math.max(0.72, cueDuration * 0.82) : Math.max(0.52, cueDuration * (lineText.length > 46 ? 0.58 : 0.46));
-    const maxByCue = literalMode ? Math.max(0.9, cueDuration * 0.98) : Math.max(0.78, cueDuration * 0.88);
-    const typedDuration = Math.min(Math.max(typedTarget, minByCue), maxByCue);
+    const cps = Math.max(1, Number(tr?.subtitleCps || D.site?.subtitleCps || 34));
+    const naturalDuration = lineText.length / cps;
+    const minimumDuration = lineText.length <= 8 ? 0.26 : 0.42;
+    const availableDuration = Math.max(minimumDuration, cueDuration - 0.12);
+    const typedDuration = Math.min(Math.max(naturalDuration, minimumDuration), availableDuration);
     const progress = Math.max(0, Math.min(1, (pt - start) / typedDuration));
     const typed = Math.max(0, Math.min(lineText.length, Math.ceil(progress * lineText.length)));
     const visible = lineText.slice(0, typed);
@@ -1539,6 +1685,7 @@
         lastTickerT = currentTime;
       }
     }
+    maybeProtocolHint();
     maybeAutoAudit();
     maybeAuditTimers();
     requestAnimationFrame(tickerLoop);
@@ -1766,6 +1913,8 @@
         updateRadioStatus(false);
         return;
       }
+      const fileLabel = String(tr.src || '').split('/').pop() || 'audio';
+      toast((lang()==='ru' ? 'ошибка загрузки: ' : 'load error: ') + fileLabel);
       if(started && currentTrack >= 0 && !userPaused) startFallbackCarrier();
     });
     els.tickerViewport.addEventListener('pointerenter', () => { tickerHold = true; });
@@ -1777,6 +1926,7 @@
       const t = pct * dur;
       if(fallbackTimer){
         fallbackT = t;
+        fallbackStartedAt = performance.now();
         positionTicker(t, true);
         updateSeekAndClock(t);
         return;
@@ -1801,6 +1951,129 @@
     els.seek.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ seekToValue(); seekDragging = false; } });
   }
 
+
+  function readSignalEnergy(){
+    const tNow = performance.now() * 0.001;
+    let energy = (started ? 0.06 : 0.025) + Math.sin(tNow * (started ? 2.2 : 1.3)) * 0.018;
+    let bins = null;
+    if(analyser && analyserData){
+      analyser.getByteFrequencyData(analyserData);
+      bins = analyserData;
+      let sum = 0;
+      const count = Math.min(48, bins.length);
+      for(let i = 0; i < count; i++) sum += bins[i];
+      const raw = count ? (sum / (count * 255)) : 0;
+      energy = Math.max(energy, Math.min(1, Math.pow(raw, 0.92) * 1.22));
+    }
+    return { energy: Math.max(0, Math.min(1, energy)), bins };
+  }
+
+  function drawSignalStage(){
+    if(!els.signalStage || !els.signalCanvas || !signalCanvasCtx) return;
+    const rect = els.signalStage.getBoundingClientRect();
+    const w = Math.max(1, Math.round(rect.width));
+    const h = Math.max(1, Math.round(rect.height));
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    if(els.signalCanvas.width !== Math.round(w * dpr) || els.signalCanvas.height !== Math.round(h * dpr)){
+      els.signalCanvas.width = Math.round(w * dpr);
+      els.signalCanvas.height = Math.round(h * dpr);
+      els.signalCanvas.style.width = `${w}px`;
+      els.signalCanvas.style.height = `${h}px`;
+    }
+    signalCanvasCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    signalCanvasCtx.clearRect(0, 0, w, h);
+
+    const frame = readSignalEnergy();
+    const energy = frame.energy;
+    const bins = frame.bins;
+    const t = performance.now() * 0.001;
+    els.signalStage.style.setProperty('--signal-energy', energy.toFixed(3));
+
+    const left = w * 0.06;
+    const right = w * 0.94;
+    const width = right - left;
+    const cy = h * 0.56;
+    const ampBase = Math.max(4, h * 0.08);
+
+    signalCanvasCtx.save();
+    signalCanvasCtx.lineCap = 'round';
+    signalCanvasCtx.lineJoin = 'round';
+
+    signalCanvasCtx.strokeStyle = 'rgba(22,22,22,.10)';
+    signalCanvasCtx.lineWidth = 1;
+    signalCanvasCtx.beginPath();
+    signalCanvasCtx.moveTo(left, cy);
+    signalCanvasCtx.lineTo(right, cy);
+    signalCanvasCtx.stroke();
+
+    const layers = [
+      { alpha: 0.16, width: 1.1, mul: 0.42, phase: 0.0, freq: 2.0 },
+      { alpha: 0.22, width: 1.2, mul: 0.7, phase: 1.4, freq: 3.2 },
+      { alpha: 0.36, width: 1.45, mul: 1.0, phase: 2.3, freq: 4.6 }
+    ];
+
+    layers.forEach((layer, layerIndex) => {
+      signalCanvasCtx.strokeStyle = `rgba(17,17,17,${layer.alpha + energy * (0.07 + layerIndex * 0.015)})`;
+      signalCanvasCtx.lineWidth = layer.width;
+      signalCanvasCtx.beginPath();
+      const segments = 180;
+      for(let i = 0; i <= segments; i++){
+        const pct = i / segments;
+        const x = left + pct * width;
+        const binIndex = bins ? Math.floor(pct * Math.max(1, bins.length - 1)) : 0;
+        const bin = bins ? bins[binIndex] / 255 : (0.5 + 0.15 * Math.sin(t * 2.4 + pct * 11));
+        const harmonic = Math.sin((pct * Math.PI * layer.freq) + t * (1.2 + layerIndex * 0.48) + layer.phase);
+        const micro = Math.sin((pct * Math.PI * 18) + t * 2.8 + layer.phase) * ampBase * 0.05;
+        const audio = (bin - 0.5) * ampBase * (1.6 + layerIndex * 0.45) * (0.4 + energy * 0.9);
+        const y = cy + harmonic * ampBase * layer.mul * (0.28 + energy * 0.92) + micro + audio;
+        if(i === 0) signalCanvasCtx.moveTo(x, y); else signalCanvasCtx.lineTo(x, y);
+      }
+      signalCanvasCtx.stroke();
+    });
+
+    const particleCount = 92;
+    for(let i = 0; i < particleCount; i++){
+      const pct = i / (particleCount - 1);
+      const x = left + pct * width;
+      const binIndex = bins ? Math.floor(pct * Math.max(1, bins.length - 1)) : 0;
+      const bin = bins ? bins[binIndex] / 255 : (0.5 + 0.2 * Math.sin(t * 2 + pct * 9));
+      const travel = Math.sin((pct * Math.PI * 4.2) + t * 1.65) * ampBase * 0.42;
+      const audio = (bin - 0.5) * ampBase * 2.2 * (0.45 + energy * 0.9);
+      const y = cy + travel + audio;
+      const r = 0.9 + bin * 1.25 + energy * 0.65;
+      signalCanvasCtx.fillStyle = `rgba(17,17,17,${0.18 + bin * 0.28 + energy * 0.16})`;
+      signalCanvasCtx.beginPath();
+      signalCanvasCtx.arc(x, y, r, 0, Math.PI * 2);
+      signalCanvasCtx.fill();
+    }
+
+    const floaters = 24;
+    for(let i = 0; i < floaters; i++){
+      const pct = (i / floaters + (t * 0.018 * (1 + energy))) % 1;
+      const x = left + pct * width;
+      const lift = (0.2 + 0.8 * Math.sin((pct * Math.PI * 2) + t * 0.7 + i) ** 2) * ampBase * (0.35 + energy * 1.4);
+      const y = cy - lift - (i % 3) * 8;
+      const alpha = 0.05 + energy * 0.11;
+      signalCanvasCtx.fillStyle = `rgba(17,17,17,${alpha})`;
+      signalCanvasCtx.beginPath();
+      signalCanvasCtx.arc(x, y, 0.8 + ((i % 5) * 0.22), 0, Math.PI * 2);
+      signalCanvasCtx.fill();
+    }
+
+    signalCanvasCtx.restore();
+  }
+
+  function initSignalWave(){
+    if(!els.signalStage || !els.signalCanvas) return;
+    signalCanvasCtx = els.signalCanvas.getContext('2d', { alpha: true, desynchronized: true });
+    if(signalVisualRAF) cancelAnimationFrame(signalVisualRAF);
+    const loop = () => {
+      drawSignalStage();
+      signalVisualRAF = requestAnimationFrame(loop);
+    };
+    loop();
+  }
+
   function attachControls(){
     [els.prev, els.play, els.next, els.seek, els.volDial, els.lowDial, els.midDial, els.highDial].filter(Boolean).forEach(el => {
       el.addEventListener('pointerdown', e => e.stopPropagation());
@@ -1820,9 +2093,10 @@
     const local = ['localhost','127.0.0.1',''].includes(location.hostname) || location.protocol === 'file:';
     if(!p.has('dev') || !local) return;
     const panel = document.createElement('div'); panel.className = 'devPanel';
-    panel.innerHTML = '<button type="button" id="devSolve1">solve rain</button><button type="button" id="devOpenGate">open public gate</button><button type="button" id="devSolve2">solve route</button>';
+    panel.innerHTML = '<button type="button" id="devOpenProtocol">open protocol</button><button type="button" id="devSolve1">solve rain</button><button type="button" id="devOpenGate">open public gate</button><button type="button" id="devSolve2">solve route</button>';
     document.body.appendChild(panel);
-    $('devSolve1').addEventListener('click', () => { state = slots.map(n => ({id:n.id, rot:0})); renderMatrix(); solvePass1(); });
+    $('devOpenProtocol').addEventListener('click', () => { unlockProtocol(); });
+    $('devSolve1').addEventListener('click', () => { if(!protocolUnlocked) unlockProtocol(); state = slots.map(n => ({id:n.id, rot:0})); renderMatrix(); solvePass1(); });
     $('devOpenGate').addEventListener('click', () => {
       const target = Number(D.site?.progress?.target || 1999);
       progressState = normalizeProgress({completions:999, donationCredits:1000, combined:target, target, unlocked:true, online:false});
@@ -1842,6 +2116,9 @@
     initQrModal();
     initKnobs();
     initTerminal();
+    initProtocol();
+    initSignalWave();
+    ensureRAF();
     initSyncLab();
     attachAudioEvents();
     attachControls();
@@ -1863,6 +2140,8 @@
           renderTerminalPrompt(true);
         }).catch(()=>{});
       }
+      applyProtocolState();
+      protocolHintStage = -1;
       const tr = D.tracks[currentTrack >= 0 ? currentTrack : 0];
       if(tr) setTitle(tr.id, tr.title.replace(/_/g,' '));
       updateRadioStatus(started && !userPaused && (Boolean(fallbackTimer) || !els.audio.paused));

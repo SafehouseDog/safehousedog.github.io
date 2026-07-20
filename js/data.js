@@ -6124,11 +6124,18 @@ window.WDR_DATA = {
       "37": 6
     },
     "routeMode": "KEYTRACE_ANY_MATCH",
-    "proofCode": "WD-ATTENTION-FHD-41"
+    "proofCode": "WD-ATTENTION-FHD-41",
+    "protocol0": {
+      "answers": [
+        "OPENTHELOCK",
+        "ОТКРОЙЗАМОК"
+      ],
+      "storageKey": "lsh_protocol0_unlocked_v1"
+    }
   },
   "site": {
     "station": "THE LAST SAFE HOUSE",
-    "case": "CASE 001 / FOLLOW WHITE DUCK",
+    "case": "PROTOCOL 0 / CASE 001 — THE WHITE DUCK",
     "domain": "whiteduck.online",
     "publicLedgerUrl": "https://github.com/followhiteduck/wire",
     "finalRouteUrl": "https://github.com/followhiteduck",
@@ -6190,6 +6197,13 @@ window.WDR_DATA = {
         "donationCredits": 0,
         "unlocked": false
       }
+    },
+    "protocol0": {
+      "answers": [
+        "OPENTHELOCK",
+        "ОТКРОЙЗАМОК"
+      ],
+      "storageKey": "lsh_protocol0_unlocked_v1"
     }
   }
 };

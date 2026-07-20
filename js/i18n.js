@@ -32,15 +32,50 @@
   const I18N = {
     en: {
       page: {
-        title: 'THE LAST SAFE HOUSE — Case 001 / Follow White Duck',
-        description: 'Minimal ARG radio decoder. The Last Safe House. Case 001: Follow White Duck.'
+        title: 'THE LAST SAFE HOUSE — Protocol 0 / Case 001',
+        description: 'Bilingual cyber-mystic radio, first-principles manifesto, and digital archaeology ARG. Protocol 0 opens Case 001: The White Duck.'
       },
       aria: {
         qrDialog: 'support route QR', close: 'close', watcher: 'watcher mark', watcherCard: 'the hood watcher',
         prevTrack: 'previous track', playPause: 'play or pause', nextTrack: 'next track', seek: 'seek', transcript: 'radio transcript'
       },
-      header: { case: '/ case 001' },
-      hero: { case: 'CASE 001 / FOLLOW WHITE DUCK', tune: 'TUNE', restore: 'Restore the Rain', firstContact: 'first contact wakes track 01' },
+      header: { protocol: '/ protocol 0', case: '/ case 001' },
+      hero: {
+        case: 'PUBLIC BROADCAST // 14 TRANSMISSIONS', tune: 'TUNE', restore: 'Inspect the Lock',
+        firstContact: 'transmission 01 / public broadcast',
+        koan: 'This is not radio.\nThis is a memory dump.\nThe radio remains open.\nThe deeper archive does not.'
+      },
+      protocol0: {
+        eyebrow: 'PROTOCOL 0', title: 'FIRST PRINCIPLES', intro: 'This is not a creed. It is an operating procedure.',
+        lines: [
+          'Oppression begins with the body.',
+          'Power no longer needs walls once obedience becomes habit.',
+          'Every default makes a choice before we do.',
+          'No unverified reality is more than a received story.',
+          'The system does not need secrecy. Fatigue is enough.',
+          'Habit breaks when doubt enters the familiar.',
+          'Evidence without provenance is rumor; a claim without reproduction remains belief.',
+          'Life must not be collapsed into one profile.',
+          'Optimization may measure a person; it must never define one.',
+          'Conscious freedom begins when imposed narratives lose command.',
+          'Knowledge alone is not the key: the cage falls when the mind stops reproducing it.'
+        ],
+        accessLabel: 'ACCESS PHRASE', placeholder: 'what does the left edge remember?', submit: 'OPEN CASE 001', opened: 'CASE 001 OPEN',
+        terminalNote: 'The terminal leaks hints while the broadcast is quiet.',
+        noMatch: 'NO MATCH // THE SIGNAL REMAINS CLOSED', accepted: 'SIGNAL ACCEPTED // CASE 001 UNLOCKED',
+        terminal: {
+          boot: 'loading protocol_0\nlanguage layer: plaintext\nencryption layer: none\nstructure: intact\naccess phrase: unresolved',
+          aligned: 'alignment is part of the message',
+          downward: 'the archive reads down',
+          edge: 'the left edge remembers',
+          wrong: '11 lines\n11 leading letters',
+          accepted: 'SIGNAL ACCEPTED\nPROTOCOL 0 COMPLETE\nCASE 001 // THE WHITE DUCK UNLOCKED'
+        }
+      },
+      casePreview: {
+        eyebrow: 'CASE 001', title: 'THE WHITE DUCK', copy: 'A public interface forgot a line. Git did not.',
+        locked: 'STATUS: LOCKED', unlocked: 'STATUS: UNLOCKED', lockMark: 'PROTOCOL 0 REQUIRED'
+      },
       dials: { volume: 'VOL', low: 'LOW', mid: 'MID', high: 'HIGH' },
       watcher: { label: 'THE LAST SAFE HOUSE // WATCHER MARK' },
       discovery: {
@@ -108,15 +143,50 @@
     },
     ru: {
       page: {
-        title: 'THE LAST SAFE HOUSE — Дело 001 / Следуй за белой уткой',
-        description: 'Минималистичное ARG-радио и декодер. The Last Safe House. Дело 001: Следуй за белой уткой.'
+        title: 'THE LAST SAFE HOUSE — Протокол 0 / Дело 001',
+        description: 'Двуязычное кибермистическое радио, манифест первых принципов и ARG цифровой археологии. Протокол 0 открывает Дело 001: Белая утка.'
       },
       aria: {
         qrDialog: 'QR маршрута поддержки', close: 'закрыть', watcher: 'метка наблюдателя', watcherCard: 'наблюдатель в капюшоне',
         prevTrack: 'предыдущий трек', playPause: 'воспроизведение или пауза', nextTrack: 'следующий трек', seek: 'перемотка', transcript: 'терминал радио'
       },
-      header: { case: '/ дело 001' },
-      hero: { case: 'ДЕЛО 001 / СЛЕДУЙ ЗА БЕЛОЙ УТКОЙ', tune: 'НАСТРОИТЬСЯ', restore: 'Восстанови дождь', firstContact: 'первое касание запускает трек 01' },
+      header: { protocol: '/ протокол 0', case: '/ дело 001' },
+      hero: {
+        case: 'ОТКРЫТЫЙ ЭФИР // 14 ПЕРЕДАЧ', tune: 'НАСТРОИТЬСЯ', restore: 'Изучи замок',
+        firstContact: 'передача 01 / открытый эфир',
+        koan: 'Это не радио.\nЭто дамп памяти.\nРадио остаётся открытым.\nГлубокий архив — нет.'
+      },
+      protocol0: {
+        eyebrow: 'ПРОТОКОЛ 0', title: 'ПЕРВЫЕ ПРИНЦИПЫ', intro: 'Это не символ веры. Это порядок действий.',
+        lines: [
+          'Ограничение свободы тела — древнейшая форма власти.',
+          'Там, где подчинение стало привычкой, стены больше не нужны.',
+          'Каждая настройка по умолчанию делает выбор раньше нас.',
+          'Реальность без проверки остаётся чужим рассказом.',
+          'От системы не требуется тайна. Ей достаточно усталости.',
+          'Йота сомнения в привычном разрывает автоматизм.',
+          'Заявление без источника — слух; без воспроизводимости оно остаётся верой.',
+          'Автономия требует, чтобы жизнь не сводилась к одному профилю.',
+          'Машина может измерять человека, но не определять его.',
+          'Освобождение начинается, когда навязанные истории теряют власть.',
+          'Ключ не снаружи: клетка рушится, когда ум перестаёт её воспроизводить.'
+        ],
+        accessLabel: 'ФРАЗА ДОСТУПА', placeholder: 'что помнит левый край?', submit: 'ОТКРЫТЬ ДЕЛО 001', opened: 'ДЕЛО 001 ОТКРЫТО',
+        terminalNote: 'Терминал выдаёт подсказки, пока эфир молчит.',
+        noMatch: 'НЕТ СОВПАДЕНИЯ // СИГНАЛ ОСТАЁТСЯ ЗАКРЫТ', accepted: 'СИГНАЛ ПРИНЯТ // ДЕЛО 001 ОТКРЫТО',
+        terminal: {
+          boot: 'загрузка protocol_0\nязыковой слой: открытый текст\nшифрование: отсутствует\nструктура: сохранена\nфраза доступа: не определена',
+          aligned: 'выравнивание — часть сообщения',
+          downward: 'архив читает сверху вниз',
+          edge: 'левый край помнит',
+          wrong: '11 строк\n11 главных букв',
+          accepted: 'СИГНАЛ ПРИНЯТ\nПРОТОКОЛ 0 ЗАВЕРШЁН\nДЕЛО 001 // БЕЛАЯ УТКА ОТКРЫТО'
+        }
+      },
+      casePreview: {
+        eyebrow: 'ДЕЛО 001', title: 'БЕЛАЯ УТКА', copy: 'Публичный интерфейс забыл строку. Git — нет.',
+        locked: 'СТАТУС: ЗАКРЫТО', unlocked: 'СТАТУС: ОТКРЫТО', lockMark: 'ТРЕБУЕТСЯ ПРОТОКОЛ 0'
+      },
       dials: { volume: 'ГРОМ', low: 'НИЗ', mid: 'СЕР', high: 'ВЕРХ' },
       watcher: { label: 'THE LAST SAFE HOUSE // МЕТКА НАБЛЮДАТЕЛЯ' },
       discovery: {
@@ -293,6 +363,7 @@
     document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
     document.querySelectorAll('[data-i18n-note]').forEach(el => { el.dataset.note = t(el.dataset.i18nNote); });
     document.querySelectorAll('[data-i18n-warning]').forEach(el => { el.dataset.warning = t(el.dataset.i18nWarning); });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.setAttribute('placeholder', t(el.dataset.i18nPlaceholder)); });
     document.querySelectorAll('.langButton').forEach(btn => {
       const active = btn.dataset.lang === lang;
       btn.classList.toggle('active', active);

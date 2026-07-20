@@ -4,10 +4,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<title>THE LAST SAFE HOUSE — Case 001 / Follow White Duck</title>
-<meta content="Minimal ARG radio decoder. The Last Safe House. Case 001: Follow White Duck." name="description"/>
+<title>THE LAST SAFE HOUSE — Protocol 0 / Case 001</title>
+<meta content="Bilingual cyber-mystic radio, first-principles manifesto, and digital archaeology ARG. Protocol 0 opens Case 001: The White Duck." name="description"/>
 <meta content="no-referrer" name="referrer"/>
-<meta content="default-src 'self'; img-src 'self' data:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://last-safe-house-counter.whiteduck.workers.dev https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="default-src 'self'; img-src 'self' data:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; connect-src 'self' https://last-safe-house-counter.whiteduck.workers.dev https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
 <link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
@@ -36,24 +36,27 @@
 <div class="status statusCenter">
 <span aria-hidden="true" class="dot" id="liveDot"></span>
 <span id="headerStatus">paused</span>
-<span class="caseSmall" data-i18n="header.case">/ case 001</span>
+<span class="caseSmall" data-i18n="header.protocol" id="headerCase">/ protocol 0</span>
 <span class="relaySmall">/ whiteduck.online</span>
-<a class="microFund" href="#support" id="topFund">next door 000/1999</a>
+<a class="microFund protocolDependent hidden" href="#support" id="topFund">next door 000/1999</a>
 </div>
 <nav aria-label="Language / Язык" class="languageSwitch"><button aria-pressed="true" class="langButton" data-lang="en" type="button">EN</button><button aria-pressed="false" class="langButton" data-lang="ru" type="button">RU</button></nav></header>
-<section aria-label="radio relay" class="hero">
-<div class="radioCard">
-<div class="meta"><span class="caseLabel" data-i18n="hero.case">CASE 001 / FOLLOW WHITE DUCK</span><span id="radioState">carrier cold</span></div>
-<div aria-label="reference signal" class="gifWrap" id="gifTrigger">
-<img alt="QR word-layer reference signal" class="qrGif" draggable="false" src="assets/reference_signal.gif"/>
-<button class="tune" data-i18n="hero.tune" id="tuneButton" type="button">TUNE</button>
+<section aria-label="public broadcast and protocol zero" class="hero">
+<div class="radioCard radioCardProtocol">
+<div class="meta"><span class="caseLabel" data-i18n="hero.case">PUBLIC BROADCAST // 14 TRANSMISSIONS</span><span id="radioState">carrier cold</span></div>
+<div aria-label="public signal particle field" class="gifWrap protocolSignalWrap" id="gifTrigger">
+<div aria-label="public signal particle field" class="signalStageInline" id="signalStage">
+<canvas aria-hidden="true" class="signalCanvas" id="signalCanvas"></canvas>
 </div>
-<h1 class="trackTitle" id="trackTitle">Restore the Rain</h1>
-<div class="subtitle" id="trackMeta">first contact wakes track 01</div>
-<div class="trackKoan" id="trackKoan">Not a station.
-A bruise in memory.
-The signal arrives blind.
-The file waits awake.</div>
+<img alt="QR word-layer reference signal" class="qrGif signalQr hidden" draggable="false" id="protocolRevealGif" src="assets/reference_signal.gif"/>
+<button class="tune tuneInline" data-i18n="hero.tune" id="tuneButton" type="button">TUNE</button>
+</div>
+<h1 class="trackTitle trackTitleWide" data-i18n="hero.restore" id="trackTitle">Inspect the Lock</h1>
+<div class="subtitle" data-i18n="hero.firstContact" id="trackMeta">transmission 01 / public broadcast</div>
+<div class="trackKoan compact" data-i18n="hero.koan" id="trackKoan">This is not radio.
+This is a memory dump.
+The radio remains open.
+The deeper archive does not.</div>
 <div aria-label="audio controls" class="controls" data-control-zone="">
 <button aria-label="previous track" class="iconBtn" data-i18n-aria="aria.prevTrack" id="prevTrack" type="button">‹</button>
 <button aria-label="play pause" class="iconBtn main" data-i18n-aria="aria.playPause" id="playPause" type="button">▶</button>
@@ -67,9 +70,44 @@ The file waits awake.</div>
 <button aria-label="mid frequencies" aria-valuemax="12" aria-valuemin="-12" aria-valuenow="0" class="dial" data-dial="mid" data-value="0" id="midDial" role="slider" type="button"><i></i><span data-i18n="dials.mid">MID</span></button>
 <button aria-label="high frequencies" aria-valuemax="12" aria-valuemin="-12" aria-valuenow="0" class="dial" data-dial="high" data-value="0" id="highDial" role="slider" type="button"><i></i><span data-i18n="dials.high">HIGH</span></button>
 </div>
+<div class="protocolBlock" id="protocolCard">
+<div class="protocolHead">
+<div><span class="eyebrow" data-i18n="protocol0.eyebrow">PROTOCOL 0</span><h2 data-i18n="protocol0.title">FIRST PRINCIPLES</h2></div>
+<span class="protocolVersion">v0.1</span>
+</div>
+<p class="protocolIntro" data-i18n="protocol0.intro">This is not a creed. It is an operating procedure.</p>
+<div class="manifest manifestSingle" id="protocolManifest">
+<p class="manifestLine" data-i18n="protocol0.lines.0">Oppression begins with the body.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.1">Power no longer needs walls once obedience becomes habit.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.2">Every default makes a choice before we do.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.3">No unverified reality is more than a received story.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.4">The system does not need secrecy. Fatigue is enough.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.5">Habit breaks when doubt enters the familiar.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.6">Evidence without provenance is rumor; a claim without reproduction remains belief.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.7">Life must not be collapsed into one profile.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.8">Optimization may measure a person; it must never define one.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.9">Conscious freedom begins when imposed narratives lose command.</p>
+<p class="manifestLine" data-i18n="protocol0.lines.10">Knowledge alone is not the key: the cage falls when the mind stops reproducing it.</p>
+</div>
+<form autocomplete="off" class="protocolForm" id="protocolForm" novalidate="">
+<label class="protocolLabel" data-i18n="protocol0.accessLabel" for="protocolInput">ACCESS PHRASE</label>
+<div class="protocolAccessRow">
+<input autocapitalize="characters" autocomplete="off" data-i18n-placeholder="protocol0.placeholder" id="protocolInput" inputmode="text" placeholder="what does the left edge remember?" spellcheck="false" type="text"/>
+<button data-i18n="protocol0.submit" id="protocolSubmit" type="submit">OPEN CASE 001</button>
+</div>
+<p aria-live="polite" class="protocolFeedback" id="protocolFeedback"></p>
+</form>
+<div class="casePreview casePreviewInline" id="casePreview">
+<span class="eyebrow" data-i18n="casePreview.eyebrow">CASE 001</span>
+<h3 data-i18n="casePreview.title">THE WHITE DUCK</h3>
+<p class="ghostText" data-i18n="casePreview.copy">A public interface forgot a line. Git did not.</p>
+<div aria-live="polite" class="caseStatus" data-i18n="casePreview.locked" id="caseStatus">STATUS: LOCKED</div>
+</div>
+<p class="protocolTerminalNote" data-i18n="protocol0.terminalNote">The terminal leaks hints while the broadcast is quiet.</p>
+</div>
 </div>
 </section>
-<section aria-label="discovery note" class="section discovery">
+<div aria-hidden="true" class="caseOne hidden" id="caseOne"><section aria-label="discovery note" class="section discovery">
 <div class="sectionHead">
 <div><span class="eyebrow" data-i18n="discovery.eyebrow">discovery note</span><h2 data-i18n="discovery.title">Not invented. Found.</h2></div>
 <p class="ghostText quiet" data-i18n="discovery.ghost">The page gives no speech until the hand leaves a mark.</p>
@@ -92,8 +130,7 @@ The file waits awake.</div>
 <div class="traceReveal" data-i18n="discovery.marksRemain" id="traceReveal">nine cold marks remain</div>
 <div class="traceReceipt" id="traceReceipt">witness marks: 0 / 9</div>
 </div>
-</section>
-<section aria-label="pass one matrix restoration" class="section gameSection">
+</section><section aria-label="pass one matrix restoration" class="section gameSection">
 <div class="sectionHead">
 <div><span class="eyebrow" data-i18n="pass1.eyebrow">pass 01</span><h2 data-i18n="pass1.title">Architecture of Rain</h2></div>
 <p class="ghostText" data-i18n="pass1.ghost">A clean room. A weather that forgot its shape.</p>
@@ -104,8 +141,7 @@ The file waits awake.</div>
 <div><span class="eyebrow" data-i18n="pass1.result">pass 01 result</span><h3 data-i18n="pass1.scarQuiet" id="unlockTitle">The scar is quiet.</h3><p data-i18n="pass1.closedWeather" id="unlockText">A closed thing may still leave weather.</p></div>
 <div class="keyBox"><small data-i18n="pass1.key">KEY</small><b id="keyValue">•••••••••</b></div>
 </div>
-</section>
-<section aria-label="pass two route" class="section">
+</section><section aria-label="pass two route" class="section">
 <div class="stageTwo locked" id="stageTwo">
 <span class="eyebrow" data-i18n="pass2.eyebrow">pass 02</span><h2 data-i18n="pass2.title">The Field That Looks Back</h2>
 <div class="globalGateStatus" data-i18n="pass2.globalWaiting" id="globalGateStatus">The second gate waits for the public scale.</div><p class="ghostText" data-i18n="pass2.ghost">The alphabet has no handle. The hand becomes the weather.</p>
@@ -116,8 +152,7 @@ The file waits awake.</div>
 <div class="routeTape" id="routeTape"></div>
 <div class="routeActions hidden" id="routeActions"><a class="smallBtn" data-i18n="pass2.openGit" href="#" id="openLedger" rel="noopener" target="_blank">OPEN GIT</a><a class="smallBtn secondary" data-i18n="pass2.requestLab" href="#" id="requestLab">REQUEST LAB ACCESS</a></div>
 </div>
-</section>
-<section aria-label="support routes" class="section supportSection" id="support">
+</section><section aria-label="support routes" class="section supportSection" id="support">
 <div class="fund">
 <div class="fundCopy">
 <span class="eyebrow" data-i18n="support.eyebrow">critical mass / 1999 usdt</span>
@@ -184,14 +219,17 @@ The file waits awake.</div>
 <a class="smallBtn" data-i18n="routes.verifyFund" href="#" id="donateLink" rel="noopener" target="_blank">VERIFY / FUND ROUTES</a>
 </div>
 </div>
-</section>
+</section></div>
+
+
+
 </main>
 <button class="terminalBeacon hidden" data-i18n="terminal.questionBeacon" id="terminalBeacon" type="button">THE HOUSE HAS A QUESTION — OPEN TERMINAL</button><footer aria-label="radio transcript" class="ticker" data-i18n-aria="aria.transcript">
 <div class="tickerViewport" id="tickerViewport"><div class="tickerInner" data-i18n="terminal.waiting" id="tickerTrack">&gt;_ waiting for first contact...</div></div>
 </footer>
-<audio id="audio" preload="metadata"></audio>
+<audio id="audio" preload="auto" playsinline webkit-playsinline></audio>
 <script src="js/i18n.js"></script><script src="js/data.js"></script>
 <script src="js/app.js"></script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "22eac6e5286a47ccb7eddc76daa7a32d"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics --><script data-cf-beacon='{"token": "22eac6e5286a47ccb7eddc76daa7a32d"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
